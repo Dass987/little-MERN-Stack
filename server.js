@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const items = require('./routes/api/Item');
 
 const { mongoURI } = require('./config/keys');
 
@@ -19,9 +20,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true })
 	.catch(error => console.log(error));
 
 // --- Routes
-app.get('/', (request, response) => {
-	response.send('HELLO WORLD');
-});
+app.use('/api/items', items);
 
 // --- Server starting
 app.listen(app.get('port'), () => {
